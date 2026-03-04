@@ -1,0 +1,686 @@
+import React, { useMemo, useState } from "react";
+import { motion } from "framer-motion";
+import {
+  Linkedin,
+  Mail,
+  MapPin,
+  Phone,
+  Briefcase,
+  GraduationCap,
+  FileText,
+  BadgeCheck,
+  BarChart3,
+  Wrench,
+  Search,
+  ExternalLink,
+  Download,
+} from "lucide-react";
+
+/**
+ * Kedar Choksi — Portfolio / Resume Website (Single-file React)
+ * - TailwindCSS classes are used for styling (assumed available).
+ * - Replace YOUR_RESUME_PDF_LINK with your hosted resume PDF link (optional).
+ */
+
+const fade = {
+  hidden: { opacity: 0, y: 12 },
+  show: { opacity: 1, y: 0 },
+};
+
+const Chip = ({ children }) => (
+  <span className="inline-flex items-center rounded-full border bg-white px-3 py-1 text-xs font-medium text-neutral-700 shadow-sm">
+    {children}
+  </span>
+);
+
+const Card = ({ children, className = "" }) => (
+  <div className={`rounded-3xl border bg-white/75 p-5 shadow-sm backdrop-blur md:p-6 ${className}`}>
+    {children}
+  </div>
+);
+
+const Section = ({ id, title, subtitle, icon: Icon, children }) => (
+  <section id={id} className="scroll-mt-24">
+    <div className="flex items-start gap-3">
+      <div className="mt-1 rounded-2xl border bg-white/70 p-2 shadow-sm backdrop-blur">
+        <Icon className="h-5 w-5" />
+      </div>
+      <div className="min-w-0">
+        <h2 className="text-xl font-semibold tracking-tight md:text-2xl">{title}</h2>
+        {subtitle ? (
+          <p className="mt-1 max-w-3xl text-sm text-neutral-600 md:text-base">{subtitle}</p>
+        ) : null}
+      </div>
+    </div>
+    <div className="mt-5">{children}</div>
+  </section>
+);
+
+const TimelineItem = ({ title, org, meta, bullets = [], tags = [] }) => (
+  <div className="relative pl-6">
+    <div className="absolute left-0 top-2 h-2 w-2 rounded-full bg-neutral-900" />
+    <div className="absolute left-[3px] top-4 h-full w-px bg-neutral-200" />
+
+    <div className="rounded-3xl border bg-white/75 p-5 shadow-sm">
+      <div className="flex flex-wrap items-start justify-between gap-3">
+        <div className="min-w-0">
+          <div className="text-base font-semibold tracking-tight md:text-lg">{title}</div>
+          <div className="mt-0.5 text-sm text-neutral-600">{org}</div>
+        </div>
+        <div className="shrink-0 text-xs text-neutral-500">{meta}</div>
+      </div>
+
+      {bullets?.length ? (
+        <ul className="mt-3 list-disc space-y-1.5 pl-5 text-sm text-neutral-700">
+          {bullets.map((b, i) => (
+            <li key={i}>{b}</li>
+          ))}
+        </ul>
+      ) : null}
+
+      {tags?.length ? (
+        <div className="mt-4 flex flex-wrap gap-2">
+          {tags.map((t, i) => (
+            <Chip key={i}>{t}</Chip>
+          ))}
+        </div>
+      ) : null}
+    </div>
+  </div>
+);
+
+const ProjectCard = ({ title, desc, highlights = [], tags = [], link }) => (
+  <Card>
+    <div className="flex flex-wrap items-start justify-between gap-3">
+      <div className="min-w-0">
+        <div className="text-base font-semibold tracking-tight md:text-lg">{title}</div>
+        <p className="mt-1 text-sm text-neutral-600">{desc}</p>
+      </div>
+      {link ? (
+        <a
+          href={link}
+          target="_blank"
+          rel="noreferrer"
+          className="inline-flex items-center gap-1 rounded-2xl border bg-white px-3 py-1.5 text-xs font-medium shadow-sm hover:bg-neutral-50"
+        >
+          View <ExternalLink className="h-3.5 w-3.5" />
+        </a>
+      ) : null}
+    </div>
+
+    {highlights?.length ? (
+      <ul className="mt-3 list-disc space-y-1.5 pl-5 text-sm text-neutral-700">
+        {highlights.map((h, i) => (
+          <li key={i}>{h}</li>
+        ))}
+      </ul>
+    ) : null}
+
+    {tags?.length ? (
+      <div className="mt-4 flex flex-wrap gap-2">
+        {tags.map((t, i) => (
+          <Chip key={i}>{t}</Chip>
+        ))}
+      </div>
+    ) : null}
+  </Card>
+);
+
+export default function KedarChoksiPortfolio() {
+  // Based directly on your uploaded resume
+  const profile = {
+    name: "Kedar Choksi",
+    title:
+      "Master’s in Project Management (Business Analysis) · Finance & Banking Ops · Process Improvement",
+    location: "Toronto, ON, Canada",
+    email: "kedarchoksi03@gmail.com",
+    phone: "+1 (647) 719-1591",
+    linkedin: "https://www.linkedin.com/in/kedar-choksi-14b839226/",
+    linkedinHandle: "kedar-choksi-14b839226",
+    resumeUrl: "YOUR_RESUME_PDF_LINK", // optional
+    summary:
+      "Engineering graduate and Master’s candidate in Project Management (Business Analysis) with experience supporting financial operations, reporting, and process improvement initiatives. Strong analytical mindset with hands-on Excel-based reporting, performance tracking, and operational workflow enhancement. Comfortable collaborating with stakeholders, documenting processes, and supporting data-driven decision-making in structured environments. Seeking co-op or entry-level opportunities in finance, banking operations, or business analysis.",
+  };
+
+  const experience = [
+    {
+      title: "Cashier (Part-time)",
+      org: "Shell Canada Limited",
+      meta: "2024 – Present · Canada",
+      bullets: [
+        "Utilised Excel and Power BI to analyze inventory and sales performance data.",
+        "Developed structured tracking tools to improve stock visibility and reduce discrepancies.",
+        "Identified workflow inefficiencies and supported operational improvements.",
+        "Maintained organised documentation of daily operational processes.",
+      ],
+      tags: ["Operations", "Inventory", "Excel", "Power BI"],
+    },
+    {
+      title: "Executive – Automation Department",
+      org: "Jainam Broking Limited (Comet Portal)",
+      meta: "2023 – 2024 · India",
+      bullets: [
+        "Led automation initiatives to improve system efficiency and reduce manual dependencies.",
+        "Managed the Comet portal, ensuring seamless functionality, and analysed user behaviour to enhance the system.",
+        "Developed new features for traders by assessing client needs and market trends using business analysis techniques.",
+        "Conducted data analysis on trading behaviours to help refine investment strategies.",
+        "Improved data efficiency, increasing user traffic and adoption compared to Techexel.",
+      ],
+      tags: ["Business Analysis", "Portal Support", "Reporting", "Process Improvement"],
+    },
+    {
+      title: "Industrial Automation Engineer Intern",
+      org: "SSM Infotech Solutions",
+      meta: "Jan 2023 – Apr 2023 · India",
+      bullets: [
+        "Worked on projects for Mercedes-Benz India, Torrent Power Solar Plant, and Crest Resins Pvt. Ltd.",
+        "Gained hands-on experience with SQL Server, InTouch HMI, PLC, and SCADA systems.",
+        "Implemented company specifications and developed custom features for clients.",
+        "Focused on automating processes to improve efficiency and meet complex project requirements.",
+      ],
+      tags: ["SQL Server", "PLC/SCADA", "HMI", "Automation"],
+    },
+  ];
+
+  const education = [
+    {
+      title: "Master’s in Project Management (Business Analysis)",
+      org: "Northeastern University — Toronto, Canada",
+      meta: "2024 – 2026",
+      bullets: [
+        "Coursework focus: requirements, stakeholder communication, planning, and delivery fundamentals.",
+      ],
+      tags: ["Project Management", "Business Analysis"],
+    },
+    {
+      title: "Bachelor of Engineering in Instrumentation & Control Engineering",
+      org: "Gujarat Technological University — India",
+      meta: "2019 – 2023",
+      bullets: [
+        "Foundation in systems thinking and industrial automation fundamentals.",
+      ],
+      tags: ["Engineering", "Systems"],
+    },
+  ];
+
+  const certifications = [
+    {
+      name: "Project Management Foundations: Requirements (PMI® Registered Education Provider)",
+      issued: "Issued: January 2025",
+    },
+    { name: "Project Management: Preventing Scope Creep", issued: "Issued: January 2025" },
+    {
+      name: "Requirements Elicitation for Business Analysis: Stakeholder Conversations",
+      issued: "Issued: January 2025",
+    },
+  ];
+
+  const projects = [
+    {
+      title: "Comet Portal — Reporting & Feature Enhancements",
+      desc:
+        "Translated stakeholder feedback into measurable report and workflow upgrades to improve adoption and efficiency.",
+      highlights: [
+        "Analysed user behaviour and pain points to guide enhancements.",
+        "Improved data efficiency and helped increase adoption compared to a legacy portal.",
+        "Supported trader-focused features by assessing client needs and market trends.",
+      ],
+      tags: ["Stakeholders", "Reporting", "Process Improvement", "Adoption"],
+      link: null,
+    },
+    {
+      title: "Operations Tracking Toolkit (Excel + Power BI)",
+      desc:
+        "Built structured tracking tools to improve stock visibility and reduce discrepancies in retail operations.",
+      highlights: [
+        "Created Excel trackers for inventory/sales performance.",
+        "Documented daily processes to support consistent execution and handovers.",
+      ],
+      tags: ["Excel", "Power BI", "Operations"],
+      link: null,
+    },
+  ];
+
+  const skillGroups = [
+    {
+      icon: FileText,
+      title: "Core Skills",
+      items: [
+        "Project Coordination",
+        "Requirements Management",
+        "Stakeholder Communication",
+        "Process Improvement",
+        "Operational Support",
+        "Problem Solving & Issue Resolution",
+      ],
+    },
+    {
+      icon: BarChart3,
+      title: "Analytics & Reporting",
+      items: ["Excel (Tracking, Reporting, Analysis)", "Power BI (Foundational / Learning)"],
+    },
+    {
+      icon: Wrench,
+      title: "Technical (Foundational)",
+      items: [
+        "SQL Server (Foundational)",
+        "Platform/Portal Support",
+        "Industrial Automation (PLC / SCADA / HMI)",
+        "Systems & Process Understanding",
+      ],
+    },
+  ];
+
+  const allTags = useMemo(() => {
+    const tags = new Set();
+    for (const item of [...experience, ...education, ...projects]) {
+      for (const t of item.tags || []) tags.add(t);
+    }
+    return Array.from(tags).sort((a, b) => a.localeCompare(b));
+  }, [experience, education, projects]);
+
+  const [q, setQ] = useState("");
+  const [activeTag, setActiveTag] = useState("All");
+
+  const filteredProjects = useMemo(() => {
+    const query = q.trim().toLowerCase();
+    return projects.filter((p) => {
+      const matchQuery =
+        !query ||
+        [p.title, p.desc, ...(p.highlights || []), ...(p.tags || [])]
+          .join(" ")
+          .toLowerCase()
+          .includes(query);
+      const matchTag = activeTag === "All" || (p.tags || []).includes(activeTag);
+      return matchQuery && matchTag;
+    });
+  }, [projects, q, activeTag]);
+
+  return (
+    <div className="min-h-screen bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-neutral-50 via-white to-neutral-50 text-neutral-900">
+      {/* Top Nav */}
+      <header className="sticky top-0 z-30 border-b bg-white/70 backdrop-blur">
+        <div className="mx-auto flex max-w-6xl items-center justify-between px-4 py-3 md:px-6">
+          <a href="#top" className="flex items-center gap-2">
+            <div className="grid h-9 w-9 place-items-center rounded-2xl border bg-white shadow-sm">
+              <span className="text-sm font-semibold">KC</span>
+            </div>
+            <div className="leading-tight">
+              <div className="text-sm font-semibold tracking-tight">{profile.name}</div>
+              <div className="text-xs text-neutral-500">Portfolio • Resume</div>
+            </div>
+          </a>
+
+          <nav className="hidden items-center gap-5 text-sm text-neutral-600 md:flex">
+            <a className="hover:text-neutral-900" href="#about">
+              About
+            </a>
+            <a className="hover:text-neutral-900" href="#experience">
+              Experience
+            </a>
+            <a className="hover:text-neutral-900" href="#projects">
+              Projects
+            </a>
+            <a className="hover:text-neutral-900" href="#skills">
+              Skills
+            </a>
+            <a className="hover:text-neutral-900" href="#education">
+              Education
+            </a>
+            <a className="hover:text-neutral-900" href="#certifications">
+              Certifications
+            </a>
+          </nav>
+
+          <div className="flex items-center gap-2">
+            {profile.resumeUrl && profile.resumeUrl !== "YOUR_RESUME_PDF_LINK" ? (
+              <a
+                href={profile.resumeUrl}
+                target="_blank"
+                rel="noreferrer"
+                className="hidden items-center gap-2 rounded-2xl border bg-neutral-900 px-3 py-2 text-xs font-medium text-white shadow-sm hover:bg-neutral-800 md:inline-flex"
+              >
+                <Download className="h-4 w-4" /> Resume
+              </a>
+            ) : null}
+            <a
+              href={profile.linkedin}
+              target="_blank"
+              rel="noreferrer"
+              className="inline-flex items-center gap-2 rounded-2xl border bg-white px-3 py-2 text-xs font-medium shadow-sm hover:bg-neutral-50"
+            >
+              <Linkedin className="h-4 w-4" /> LinkedIn
+            </a>
+          </div>
+        </div>
+      </header>
+
+      {/* Hero */}
+      <main id="top" className="relative mx-auto max-w-6xl px-4 py-10 md:px-6 md:py-14">
+        {/* Decorative background */}
+        <div aria-hidden className="pointer-events-none absolute inset-0 -z-10 overflow-hidden">
+          <div className="absolute -top-24 left-1/2 h-[520px] w-[520px] -translate-x-1/2 rounded-full bg-neutral-200/40 blur-3xl" />
+          <div className="absolute top-32 -left-24 h-[420px] w-[420px] rounded-full bg-neutral-300/30 blur-3xl" />
+          <div className="absolute bottom-0 -right-24 h-[420px] w-[420px] rounded-full bg-neutral-200/30 blur-3xl" />
+          <svg className="absolute inset-0 h-full w-full opacity-[0.18]" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <pattern id="dot" width="18" height="18" patternUnits="userSpaceOnUse">
+                <circle cx="2" cy="2" r="1" fill="black" />
+              </pattern>
+              <mask id="fade">
+                <rect width="100%" height="100%" fill="white" />
+                <rect y="0" width="100%" height="100%" fill="url(#dot)" />
+              </mask>
+            </defs>
+            <rect width="100%" height="100%" fill="url(#dot)" mask="url(#fade)" />
+          </svg>
+        </div>
+
+        <motion.div variants={fade} initial="hidden" animate="show" className="grid gap-8 md:grid-cols-5"> className="mx-auto max-w-6xl px-4 py-10 md:px-6 md:py-14">
+        <motion.div variants={fade} initial="hidden" animate="show" className="grid gap-8 md:grid-cols-5">
+          <div className="md:col-span-3">
+            <div className="inline-flex items-center gap-2 rounded-full border bg-white px-3 py-1 text-xs text-neutral-600 shadow-sm">
+              <BadgeCheck className="h-4 w-4" /> Available for co-op / entry-level
+            </div>
+            <h1 className="mt-4 text-3xl font-semibold tracking-tight md:text-5xl">
+              {profile.name}
+            </h1>
+            <p className="mt-3 text-base text-neutral-600 md:text-lg">{profile.title}</p>
+            <p className="mt-5 max-w-2xl text-sm leading-relaxed text-neutral-700 md:text-base">
+              {profile.summary}
+            </p>
+
+            <div className="mt-6 flex flex-wrap gap-2">
+              <span className="inline-flex items-center gap-2 rounded-2xl border bg-white px-3 py-2 text-sm shadow-sm">
+                <MapPin className="h-4 w-4 text-neutral-700" /> {profile.location}
+              </span>
+              <a
+                href={`mailto:${profile.email}`}
+                className="inline-flex items-center gap-2 rounded-2xl border bg-white px-3 py-2 text-sm shadow-sm hover:bg-neutral-50"
+              >
+                <Mail className="h-4 w-4 text-neutral-700" /> {profile.email}
+              </a>
+              <span className="inline-flex items-center gap-2 rounded-2xl border bg-white px-3 py-2 text-sm shadow-sm">
+                <Phone className="h-4 w-4 text-neutral-700" /> {profile.phone}
+              </span>
+            </div>
+
+            <div className="mt-7 flex flex-wrap gap-3">
+              <a
+                href="#projects"
+                className="inline-flex items-center justify-center rounded-2xl bg-neutral-900 px-5 py-3 text-sm font-medium text-white shadow-sm hover:bg-neutral-800"
+              >
+                View Projects
+              </a>
+              <a
+                href="#experience"
+                className="inline-flex items-center justify-center rounded-2xl border bg-white px-5 py-3 text-sm font-medium shadow-sm hover:bg-neutral-50"
+              >
+                Work Experience
+              </a>
+            </div>
+          </div>
+
+          <div className="md:col-span-2">
+            <Card>
+              <div className="text-sm font-semibold tracking-tight">Quick Profile</div>
+              <div className="mt-3 grid grid-cols-2 gap-3">
+                <div className="rounded-2xl border bg-white/70 p-4 shadow-sm">
+                  <div className="text-xs font-medium text-neutral-500">Target roles</div>
+                  <div className="mt-1 text-sm font-semibold">BA • Banking Ops • PM</div>
+                </div>
+                <div className="rounded-2xl border bg-white/70 p-4 shadow-sm">
+                  <div className="text-xs font-medium text-neutral-500">Strength</div>
+                  <div className="mt-1 text-sm font-semibold">Process + Reporting</div>
+                </div>
+                <div className="rounded-2xl border bg-white/70 p-4 shadow-sm">
+                  <div className="text-xs font-medium text-neutral-500">Tools</div>
+                  <div className="mt-1 text-sm font-semibold">Excel • Power BI</div>
+                </div>
+                <div className="rounded-2xl border bg-white/70 p-4 shadow-sm">
+                  <div className="text-xs font-medium text-neutral-500">Domain</div>
+                  <div className="mt-1 text-sm font-semibold">Finance + Ops</div>
+                </div>
+              </div>
+
+              <div className="mt-5">
+                <div className="text-xs font-medium text-neutral-500">LinkedIn</div>
+                <a
+                  href={profile.linkedin}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="mt-1 inline-flex items-center gap-2 text-sm font-medium hover:underline"
+                >
+                  {profile.linkedinHandle} <ExternalLink className="h-4 w-4" />
+                </a>
+              </div>
+            </Card>
+          </div>
+        </motion.div>
+
+        <div className="mt-12 grid gap-10">
+          <Section id="about" title="About" icon={FileText} subtitle="A quick story + what I bring to a team.">
+            <div className="grid gap-4 md:grid-cols-5">
+              <Card className="md:col-span-3">
+                <p className="text-sm leading-relaxed text-neutral-700 md:text-base">
+                  I’m a Master’s candidate in Project Management (Business Analysis) with a hands-on background in
+                  financial services portal support (Comet) and day-to-day operations. I like clarity: define the problem,
+                  confirm stakeholder needs, document the process, and build simple reporting/tracking so decisions are
+                  fast and execution stays consistent.
+                </p>
+                <div className="mt-4 grid gap-3 sm:grid-cols-3">
+                  <div className="rounded-2xl border bg-white/70 p-4 shadow-sm">
+                    <div className="text-xs font-medium text-neutral-500">I’m strongest at</div>
+                    <div className="mt-1 text-sm font-semibold">Requirements → Execution</div>
+                  </div>
+                  <div className="rounded-2xl border bg-white/70 p-4 shadow-sm">
+                    <div className="text-xs font-medium text-neutral-500">I deliver</div>
+                    <div className="mt-1 text-sm font-semibold">Process + Reporting</div>
+                  </div>
+                  <div className="rounded-2xl border bg-white/70 p-4 shadow-sm">
+                    <div className="text-xs font-medium text-neutral-500">I care about</div>
+                    <div className="mt-1 text-sm font-semibold">Accuracy + Trust</div>
+                  </div>
+                </div>
+                <div className="mt-4 flex flex-wrap gap-2">
+                  <Chip>Stakeholder Communication</Chip>
+                  <Chip>Requirements</Chip>
+                  <Chip>Reporting</Chip>
+                  <Chip>Process Improvement</Chip>
+                  <Chip>Operational Support</Chip>
+                </div>
+              </Card>
+
+              <Card className="md:col-span-2">
+                <div className="text-sm font-semibold tracking-tight">What I’m looking for</div>
+                <p className="mt-2 text-sm text-neutral-600">
+                  Co-op or entry-level roles in <span className="font-medium text-neutral-800">Business Analysis</span>,
+                  <span className="font-medium text-neutral-800"> Banking Operations</span>, or
+                  <span className="font-medium text-neutral-800"> Project Coordination</span>.
+                </p>
+                <div className="mt-4 space-y-2 text-sm text-neutral-700">
+                  <div className="flex gap-2">
+                    <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-neutral-900" />
+                    <span>Strong Excel reporting + structured documentation</span>
+                  </div>
+                  <div className="flex gap-2">
+                    <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-neutral-900" />
+                    <span>Comfortable coordinating across stakeholders</span>
+                  </div>
+                  <div className="flex gap-2">
+                    <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-neutral-900" />
+                    <span>Reliable execution in operational environments</span>
+                  </div>
+                </div>
+              </Card>
+            </div>
+          </Section>
+
+          <Section
+            id="experience"
+            title="Experience"
+            icon={Briefcase}
+            subtitle="Impact-focused bullets so recruiters can understand your value fast."
+          >
+            <div className="grid gap-4">
+              {experience.map((e, idx) => (
+                <TimelineItem key={idx} {...e} />
+              ))}
+            </div>
+          </Section>
+
+          <Section
+            id="projects"
+            title="Projects"
+            icon={FileText}
+            subtitle="A few strong, recruiter-friendly highlights (searchable)."
+          >
+            <div className="flex flex-col gap-4">
+              <div className="flex flex-col gap-3 md:flex-row md:items-center md:justify-between">
+                <div className="relative max-w-xl flex-1">
+                  <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-neutral-400" />
+                  <input
+                    value={q}
+                    onChange={(e) => setQ(e.target.value)}
+                    placeholder="Search projects (e.g., reporting, Excel, stakeholder)…"
+                    className="w-full rounded-2xl border bg-white px-10 py-3 text-sm shadow-sm outline-none focus:ring-2 focus:ring-neutral-200"
+                  />
+                </div>
+
+                <div className="flex flex-wrap gap-2">
+                  <button
+                    onClick={() => setActiveTag("All")}
+                    className={`rounded-2xl border px-3 py-2 text-xs font-medium shadow-sm hover:bg-neutral-50 ${
+                      activeTag === "All" ? "bg-neutral-900 text-white" : "bg-white"
+                    }`}
+                  >
+                    All
+                  </button>
+                  {allTags.slice(0, 6).map((t) => (
+                    <button
+                      key={t}
+                      onClick={() => setActiveTag(t)}
+                      className={`rounded-2xl border px-3 py-2 text-xs font-medium shadow-sm hover:bg-neutral-50 ${
+                        activeTag === t ? "bg-neutral-900 text-white" : "bg-white"
+                      }`}
+                    >
+                      {t}
+                    </button>
+                  ))}
+                </div>
+              </div>
+
+              <div className="grid gap-4 md:grid-cols-2">
+                {filteredProjects.map((p, i) => (
+                  <ProjectCard key={i} {...p} />
+                ))}
+              </div>
+
+              {!filteredProjects.length ? (
+                <Card>
+                  <div className="text-sm text-neutral-600">No projects match your search. Try a different keyword.</div>
+                </Card>
+              ) : null}
+            </div>
+          </Section>
+
+          <Section id="skills" title="Skills" icon={Wrench}>
+            <div className="grid gap-4 md:grid-cols-3">
+              {skillGroups.map((g, idx) => (
+                <Card key={idx}>
+                  <div className="flex items-center gap-2">
+                    <g.icon className="h-5 w-5" />
+                    <div className="text-sm font-semibold tracking-tight">{g.title}</div>
+                  </div>
+                  <ul className="mt-3 space-y-2 text-sm text-neutral-700">
+                    {g.items.map((s, i) => (
+                      <li key={i} className="flex gap-2">
+                        <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-neutral-900" />
+                        <span>{s}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </Card>
+              ))}
+            </div>
+          </Section>
+
+          <Section id="education" title="Education" icon={GraduationCap}>
+            <div className="grid gap-4">
+              {education.map((e, idx) => (
+                <TimelineItem key={idx} {...e} />
+              ))}
+            </div>
+          </Section>
+
+          <Section id="certifications" title="Certifications" icon={BadgeCheck}>
+            <div className="grid gap-4 md:grid-cols-2">
+              {certifications.map((c, idx) => (
+                <Card key={idx}>
+                  <div className="text-sm font-semibold tracking-tight">{c.name}</div>
+                  <div className="mt-1 text-xs text-neutral-500">{c.issued}</div>
+                </Card>
+              ))}
+            </div>
+          </Section>
+
+          <Section id="contact" title="Contact" icon={Mail} subtitle="If you like my profile, let’s connect.">
+            <Card>
+              <div className="grid gap-3 md:grid-cols-3">
+                <a
+                  href={`mailto:${profile.email}`}
+                  className="flex items-center justify-between rounded-2xl border bg-white px-4 py-3 text-sm shadow-sm hover:bg-neutral-50"
+                >
+                  <span className="inline-flex items-center gap-2">
+                    <Mail className="h-4 w-4" /> Email
+                  </span>
+                  <span className="text-neutral-600">{profile.email}</span>
+                </a>
+
+                <a
+                  href={profile.linkedin}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="flex items-center justify-between rounded-2xl border bg-white px-4 py-3 text-sm shadow-sm hover:bg-neutral-50"
+                >
+                  <span className="inline-flex items-center gap-2">
+                    <Linkedin className="h-4 w-4" /> LinkedIn
+                  </span>
+                  <span className="text-neutral-600">{profile.linkedinHandle}</span>
+                </a>
+
+                <div className="flex items-center justify-between rounded-2xl border bg-white px-4 py-3 text-sm shadow-sm">
+                  <span className="inline-flex items-center gap-2">
+                    <Phone className="h-4 w-4" /> Phone
+                  </span>
+                  <span className="text-neutral-600">{profile.phone}</span>
+                </div>
+              </div>
+
+              {profile.resumeUrl && profile.resumeUrl !== "YOUR_RESUME_PDF_LINK" ? (
+                <div className="mt-4">
+                  <a
+                    href={profile.resumeUrl}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="inline-flex items-center gap-2 rounded-2xl bg-neutral-900 px-4 py-3 text-sm font-medium text-white shadow-sm hover:bg-neutral-800"
+                  >
+                    <Download className="h-4 w-4" /> Download Resume
+                  </a>
+                </div>
+              ) : (
+                <div className="mt-4 text-xs text-neutral-500">
+                  Tip: Add your hosted resume PDF link by replacing <span className="font-mono">YOUR_RESUME_PDF_LINK</span>.
+                </div>
+              )}
+            </Card>
+          </Section>
+
+          <footer className="pb-10 pt-2 text-center text-xs text-neutral-500">
+            © {new Date().getFullYear()} {profile.name}. Built as a clean, recruiter-friendly one-page portfolio.
+          </footer>
+        </div>
+      </main>
+    </div>
+  );
+}
