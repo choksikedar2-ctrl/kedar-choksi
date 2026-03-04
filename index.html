@@ -4,20 +4,13 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Kedar Choksi — Portfolio</title>
-  <meta name="description" content="Kedar Choksi — Project Management (Business Analysis) | Banking Ops | Process Improvement. Resume-style portfolio website." />
+  <meta name="description" content="Kedar Choksi — Project Management (Business Analysis) | Banking Ops | Process Improvement. Story-driven portfolio for recruiters." />
 
-  <!-- Social preview -->
-  <meta property="og:title" content="Kedar Choksi — Portfolio" />
-  <meta property="og:description" content="Project Management (Business Analysis) | Banking Ops | Process Improvement" />
-  <meta property="og:type" content="website" />
-
-  <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
-
-  <!-- Tailwind CDN -->
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <script src="https://cdn.tailwindcss.com"></script>
+
   <script>
     tailwind.config = {
       darkMode: 'class',
@@ -25,7 +18,8 @@
         extend: {
           fontFamily: { sans: ['Plus Jakarta Sans', 'ui-sans-serif', 'system-ui'] },
           boxShadow: {
-            soft: '0 20px 50px -25px rgba(0,0,0,.25)',
+            soft: '0 22px 60px -30px rgba(0,0,0,.35)',
+            glow: '0 0 0 1px rgba(255,255,255,.08), 0 24px 80px -45px rgba(99,102,241,.55)'
           }
         }
       }
@@ -33,82 +27,112 @@
   </script>
 
   <style>
-    /* Premium background + subtle grid */
-    .bg-aurora {
-      background:
-        radial-gradient(800px 380px at 20% 10%, rgba(99,102,241,.18), transparent 60%),
-        radial-gradient(800px 380px at 80% 0%, rgba(16,185,129,.14), transparent 55%),
-        radial-gradient(900px 520px at 55% 100%, rgba(244,63,94,.10), transparent 55%),
-        linear-gradient(180deg, rgba(255,255,255,1), rgba(250,250,250,1));
+    :root{
+      --bg1:#0b1020; --bg2:#070a12;
+      --card: rgba(255,255,255,.06);
+      --line: rgba(255,255,255,.10);
+      --text: rgba(255,255,255,.88);
+      --muted: rgba(255,255,255,.62);
+      --brand1:#7c3aed; /* violet */
+      --brand2:#22c55e; /* green */
+      --brand3:#06b6d4; /* cyan */
+      --brand4:#f97316; /* orange */
     }
-    .dark .bg-aurora {
-      background:
-        radial-gradient(800px 380px at 20% 10%, rgba(99,102,241,.22), transparent 60%),
-        radial-gradient(800px 380px at 80% 0%, rgba(16,185,129,.18), transparent 55%),
-        radial-gradient(900px 520px at 55% 100%, rgba(244,63,94,.12), transparent 55%),
-        linear-gradient(180deg, rgba(10,10,10,1), rgba(12,12,12,1));
-    }
-    .grid-overlay {
-      background-image:
-        linear-gradient(to right, rgba(0,0,0,.05) 1px, transparent 1px),
-        linear-gradient(to bottom, rgba(0,0,0,.05) 1px, transparent 1px);
-      background-size: 44px 44px;
-      mask-image: radial-gradient(ellipse at top, black 55%, transparent 75%);
-    }
-    .dark .grid-overlay {
+    body{ background: radial-gradient(900px 500px at 20% 0%, rgba(124,58,237,.25), transparent 60%),
+                   radial-gradient(900px 500px at 80% 0%, rgba(34,197,94,.18), transparent 60%),
+                   radial-gradient(900px 700px at 50% 120%, rgba(6,182,212,.14), transparent 60%),
+                   linear-gradient(180deg, var(--bg1), var(--bg2));
+          color: var(--text); }
+    .glass{ background: var(--card); border: 1px solid var(--line); backdrop-filter: blur(14px); }
+    .grid-overlay{
       background-image:
         linear-gradient(to right, rgba(255,255,255,.06) 1px, transparent 1px),
         linear-gradient(to bottom, rgba(255,255,255,.06) 1px, transparent 1px);
+      background-size: 48px 48px;
+      mask-image: radial-gradient(ellipse at top, black 55%, transparent 80%);
+      opacity: .25;
     }
-
-    /* Smooth reveal */
-    .reveal { opacity: 0; transform: translateY(12px); transition: all .7s ease; }
-    .reveal.in { opacity: 1; transform: translateY(0); }
-
-    /* Nice selection */
-    ::selection { background: rgba(99,102,241,.25); }
-
-    /* Anchor offset for sticky nav */
-    section { scroll-margin-top: 88px; }
+    section{ scroll-margin-top: 90px; }
+    .reveal{ opacity:0; transform: translateY(14px); transition: all .75s ease; }
+    .reveal.in{ opacity:1; transform: translateY(0); }
+    .chip{
+      border:1px solid rgba(255,255,255,.14);
+      background: rgba(255,255,255,.06);
+    }
+    .btn{
+      border:1px solid rgba(255,255,255,.14);
+      background: rgba(255,255,255,.06);
+    }
+    .btn-primary{
+      background: linear-gradient(135deg, rgba(124,58,237,.95), rgba(6,182,212,.75));
+      border:1px solid rgba(255,255,255,.14);
+    }
+    .shine{
+      position: relative; overflow: hidden;
+    }
+    .shine::after{
+      content:"";
+      position:absolute; inset:-120px;
+      background: radial-gradient(circle at 20% 20%, rgba(255,255,255,.18), transparent 40%);
+      transform: rotate(12deg);
+      pointer-events:none;
+    }
+    .divider{
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,.18), transparent);
+    }
+    .k{
+      background: linear-gradient(135deg, rgba(124,58,237,1), rgba(34,197,94,1), rgba(6,182,212,1));
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+    .pill{
+      background: linear-gradient(135deg, rgba(124,58,237,.22), rgba(6,182,212,.18));
+      border:1px solid rgba(255,255,255,.14);
+    }
+    .tagline{
+      color: rgba(255,255,255,.72);
+    }
+    .muted{ color: var(--muted); }
+    .icon-dot{
+      width:10px; height:10px; border-radius:999px;
+      background: linear-gradient(135deg, var(--brand1), var(--brand3));
+      box-shadow: 0 0 0 6px rgba(124,58,237,.12);
+    }
   </style>
 </head>
 
-<body class="bg-aurora text-neutral-900 dark:text-neutral-100">
-  <!-- Background grid -->
-  <div class="pointer-events-none fixed inset-0 grid-overlay opacity-30"></div>
+<body>
+  <div class="pointer-events-none fixed inset-0 grid-overlay"></div>
 
-  <!-- Top Nav -->
-  <header class="sticky top-0 z-50 border-b border-black/5 dark:border-white/10 bg-white/70 dark:bg-black/40 backdrop-blur">
+  <!-- NAV -->
+  <header class="sticky top-0 z-50 border-b border-white/10 bg-black/35 backdrop-blur">
     <div class="mx-auto max-w-6xl px-4 py-3 flex items-center justify-between">
       <a href="#top" class="flex items-center gap-3">
-        <div class="h-10 w-10 rounded-2xl bg-black text-white dark:bg-white dark:text-black grid place-items-center font-bold shadow-soft">
-          KC
-        </div>
+        <div class="h-10 w-10 rounded-2xl grid place-items-center font-extrabold text-black bg-white shadow-soft">KC</div>
         <div class="leading-tight">
           <div class="font-semibold tracking-tight">Kedar Choksi</div>
-          <div class="text-xs text-neutral-600 dark:text-neutral-400">Portfolio • Resume</div>
+          <div class="text-xs muted">Story-driven Portfolio • Recruiter Friendly</div>
         </div>
       </a>
 
-      <nav class="hidden md:flex items-center gap-5 text-sm text-neutral-700 dark:text-neutral-300">
-        <a class="hover:text-black dark:hover:text-white" href="#about">About</a>
-        <a class="hover:text-black dark:hover:text-white" href="#experience">Experience</a>
-        <a class="hover:text-black dark:hover:text-white" href="#projects">Projects</a>
-        <a class="hover:text-black dark:hover:text-white" href="#skills">Skills</a>
-        <a class="hover:text-black dark:hover:text-white" href="#education">Education</a>
-        <a class="hover:text-black dark:hover:text-white" href="#certs">Certifications</a>
-        <a class="hover:text-black dark:hover:text-white" href="#contact">Contact</a>
+      <nav class="hidden md:flex items-center gap-5 text-sm muted">
+        <a class="hover:text-white" href="#story">Story</a>
+        <a class="hover:text-white" href="#impact">Impact</a>
+        <a class="hover:text-white" href="#experience">Experience</a>
+        <a class="hover:text-white" href="#projects">Projects</a>
+        <a class="hover:text-white" href="#skills">Skills</a>
+        <a class="hover:text-white" href="#contact">Contact</a>
       </nav>
 
       <div class="flex items-center gap-2">
-        <button id="themeBtn"
-          class="rounded-2xl border border-black/10 dark:border-white/15 bg-white/70 dark:bg-white/5 px-3 py-2 text-xs font-medium hover:bg-white dark:hover:bg-white/10">
-          🌙 Dark
+        <button id="themeBtn" class="btn rounded-2xl px-3 py-2 text-xs font-semibold hover:bg-white/10">
+          ☀️ Light
         </button>
-
-        <a href="https://www.linkedin.com/in/kedar-choksi-14b839226/" target="_blank"
-          class="rounded-2xl bg-black text-white dark:bg-white dark:text-black px-4 py-2 text-xs font-semibold shadow-soft hover:opacity-90">
-          LinkedIn
+        <a id="resumeBtn" href="#" target="_blank"
+           class="btn-primary rounded-2xl px-4 py-2 text-xs font-semibold shadow-glow hover:opacity-90">
+          Download Resume
         </a>
       </div>
     </div>
@@ -118,130 +142,147 @@
     <!-- HERO -->
     <section class="reveal grid gap-8 md:grid-cols-12 items-start">
       <div class="md:col-span-7">
-        <div class="inline-flex items-center gap-2 rounded-full border border-black/10 dark:border-white/15 bg-white/70 dark:bg-white/5 px-3 py-1 text-xs text-neutral-700 dark:text-neutral-300">
-          ✅ Available for Co-op / Entry-level • BA • Banking Ops • PM Support
+        <div class="pill inline-flex items-center gap-2 rounded-full px-3 py-1 text-xs">
+          <span class="icon-dot"></span>
+          Available for Co-op / Entry-level • BA • Banking Ops • PM Support
         </div>
 
-        <h1 class="mt-4 text-4xl md:text-6xl font-bold tracking-tight">
-          Kedar Choksi
+        <h1 class="mt-5 text-4xl md:text-6xl font-extrabold tracking-tight leading-[1.05]">
+          Turning <span class="k">operations + data</span> into clear decisions and reliable delivery.
         </h1>
 
-        <p class="mt-3 text-lg md:text-xl text-neutral-700 dark:text-neutral-300">
-          Master’s in Project Management (Business Analysis) • Finance & Banking Ops • Process Improvement
+        <p class="mt-4 text-lg tagline">
+          Master’s (Project Management — Business Analysis) • Finance & Banking Ops • Process Improvement
         </p>
 
-        <p class="mt-5 text-sm md:text-base leading-relaxed text-neutral-700 dark:text-neutral-300 max-w-2xl">
-          Engineering graduate and Master’s candidate in Project Management (Business Analysis) with experience supporting financial operations, reporting, and process improvement initiatives.
-          Strong analytical mindset with Excel-based reporting, performance tracking, and operational workflow enhancement.
-          Comfortable collaborating with stakeholders, documenting processes, and supporting data-driven decision-making.
+        <p class="mt-5 text-sm md:text-base leading-relaxed muted max-w-2xl">
+          I help teams reduce confusion and improve outcomes by clarifying requirements, improving reporting, and strengthening workflows.
+          My experience spans a financial services client portal (Comet) and operational environments — combining analysis with execution.
         </p>
 
         <div class="mt-6 flex flex-wrap gap-2">
-          <span class="rounded-2xl border border-black/10 dark:border-white/15 bg-white/70 dark:bg-white/5 px-4 py-2 text-sm">
-            📍 Toronto, ON, Canada
-          </span>
-          <a class="rounded-2xl border border-black/10 dark:border-white/15 bg-white/70 dark:bg-white/5 px-4 py-2 text-sm hover:bg-white dark:hover:bg-white/10"
-             href="mailto:kedarchoksi03@gmail.com">
-            ✉️ kedarchoksi03@gmail.com
-          </a>
-          <span class="rounded-2xl border border-black/10 dark:border-white/15 bg-white/70 dark:bg-white/5 px-4 py-2 text-sm">
-            📞 +1 (647) 719-1591
-          </span>
+          <span class="chip rounded-2xl px-4 py-2 text-sm">📍 Toronto, ON, Canada</span>
+          <a class="chip rounded-2xl px-4 py-2 text-sm hover:bg-white/10" href="mailto:kedarchoksi03@gmail.com">✉️ kedarchoksi03@gmail.com</a>
+          <span class="chip rounded-2xl px-4 py-2 text-sm">📞 +1 (647) 719-1591</span>
         </div>
 
         <div class="mt-7 flex flex-wrap gap-3">
-          <a href="#projects"
-             class="rounded-2xl bg-black text-white dark:bg-white dark:text-black px-6 py-3 text-sm font-semibold shadow-soft hover:opacity-90">
-            View Projects
-          </a>
-
-          <!-- Resume button: add your resume PDF link below -->
-          <a id="resumeBtn" href="#" target="_blank"
-             class="rounded-2xl border border-black/10 dark:border-white/15 bg-white/70 dark:bg-white/5 px-6 py-3 text-sm font-semibold hover:bg-white dark:hover:bg-white/10">
-            Download Resume
-          </a>
+          <a href="#projects" class="btn-primary rounded-2xl px-6 py-3 text-sm font-semibold shadow-glow hover:opacity-90">See My Work</a>
+          <a href="https://www.linkedin.com/in/kedar-choksi-14b839226/" target="_blank"
+             class="btn rounded-2xl px-6 py-3 text-sm font-semibold hover:bg-white/10">LinkedIn</a>
         </div>
-
-        <p class="mt-3 text-xs text-neutral-500 dark:text-neutral-400">
-          Tip: To enable “Download Resume”, edit the link inside <code class="font-mono">resumeLink</code> in the script at the bottom.
-        </p>
       </div>
 
       <div class="md:col-span-5">
-        <div class="reveal rounded-3xl border border-black/10 dark:border-white/15 bg-white/70 dark:bg-white/5 p-6 shadow-soft">
+        <div class="reveal glass shine rounded-3xl p-6 shadow-soft">
           <div class="text-sm font-semibold tracking-tight">Recruiter Snapshot</div>
-
           <div class="mt-4 grid grid-cols-2 gap-3">
-            <div class="rounded-2xl border border-black/10 dark:border-white/15 bg-white/70 dark:bg-white/5 p-4">
-              <div class="text-xs text-neutral-500 dark:text-neutral-400">Target roles</div>
-              <div class="mt-1 font-semibold">BA • Banking Ops • PM</div>
+            <div class="glass rounded-2xl p-4">
+              <div class="text-xs muted">Target</div>
+              <div class="mt-1 font-semibold">Business Analyst</div>
             </div>
-            <div class="rounded-2xl border border-black/10 dark:border-white/15 bg-white/70 dark:bg-white/5 p-4">
-              <div class="text-xs text-neutral-500 dark:text-neutral-400">Strength</div>
-              <div class="mt-1 font-semibold">Process + Reporting</div>
+            <div class="glass rounded-2xl p-4">
+              <div class="text-xs muted">Domain</div>
+              <div class="mt-1 font-semibold">Finance / Ops</div>
             </div>
-            <div class="rounded-2xl border border-black/10 dark:border-white/15 bg-white/70 dark:bg-white/5 p-4">
-              <div class="text-xs text-neutral-500 dark:text-neutral-400">Tools</div>
+            <div class="glass rounded-2xl p-4">
+              <div class="text-xs muted">Tools</div>
               <div class="mt-1 font-semibold">Excel • Power BI</div>
             </div>
-            <div class="rounded-2xl border border-black/10 dark:border-white/15 bg-white/70 dark:bg-white/5 p-4">
-              <div class="text-xs text-neutral-500 dark:text-neutral-400">Domain</div>
-              <div class="mt-1 font-semibold">Finance + Ops</div>
+            <div class="glass rounded-2xl p-4">
+              <div class="text-xs muted">Superpower</div>
+              <div class="mt-1 font-semibold">Process Clarity</div>
             </div>
           </div>
 
-          <div class="mt-5 text-sm text-neutral-700 dark:text-neutral-300">
-            <div class="font-semibold">Brand statement</div>
-            <p class="mt-2 leading-relaxed">
-              I turn stakeholder needs into clear requirements and practical tracking/reporting — so teams reduce errors, improve speed, and deliver consistently.
-            </p>
-          </div>
+          <div class="divider my-5"></div>
+
+          <div class="text-sm font-semibold">What I deliver</div>
+          <ul class="mt-3 space-y-2 text-sm muted">
+            <li>• Clear requirements → fewer mistakes</li>
+            <li>• Strong reporting → faster decisions</li>
+            <li>• Better workflows → consistent execution</li>
+          </ul>
         </div>
       </div>
     </section>
 
-    <!-- ABOUT -->
-    <section id="about" class="reveal mt-12">
+    <!-- STORY -->
+    <section id="story" class="reveal mt-12">
       <div class="flex items-start gap-3">
-        <div class="mt-1 rounded-2xl border border-black/10 dark:border-white/15 bg-white/70 dark:bg-white/5 p-2">📌</div>
+        <div class="glass rounded-2xl p-2">📖</div>
         <div>
-          <h2 class="text-2xl md:text-3xl font-bold tracking-tight">About</h2>
-          <p class="mt-1 text-sm md:text-base text-neutral-700 dark:text-neutral-300">
-            Clear story + what you deliver. Recruiters understand you in 10 seconds.
-          </p>
+          <h2 class="text-2xl md:text-3xl font-extrabold tracking-tight">My Story</h2>
+          <p class="mt-1 muted">A simple storyline recruiters remember.</p>
         </div>
       </div>
 
       <div class="mt-5 grid gap-4 md:grid-cols-12">
-        <div class="md:col-span-7 rounded-3xl border border-black/10 dark:border-white/15 bg-white/70 dark:bg-white/5 p-6 shadow-soft">
-          <p class="text-sm md:text-base leading-relaxed text-neutral-700 dark:text-neutral-300">
-            My background combines <span class="font-semibold">financial services portal support</span> (Comet portal at a broking firm) and <span class="font-semibold">hands-on operations</span>.
-            I like bringing structure: define the problem, confirm stakeholder needs, document the process, and build simple reporting/tracking to improve decisions and execution.
+        <div class="glass rounded-3xl p-6 shadow-soft md:col-span-7">
+          <h3 class="text-lg font-semibold">From Automation → Finance & Business Analysis</h3>
+          <p class="mt-3 muted leading-relaxed text-sm md:text-base">
+            I started in industrial automation where accuracy and systems-thinking are everything.
+            Then I moved into a financial services environment, managing the <b>Comet portal</b> and improving reports/workflows based on stakeholder needs.
+            Now, in Canada, I’m building my career in <b>Business Analysis / Banking Operations</b> — where structured thinking, documentation, and data-driven decisions matter every day.
           </p>
-
           <div class="mt-4 flex flex-wrap gap-2">
-            <span class="rounded-full border border-black/10 dark:border-white/15 bg-white/70 dark:bg-white/5 px-3 py-1 text-xs font-medium">Requirements</span>
-            <span class="rounded-full border border-black/10 dark:border-white/15 bg-white/70 dark:bg-white/5 px-3 py-1 text-xs font-medium">Stakeholders</span>
-            <span class="rounded-full border border-black/10 dark:border-white/15 bg-white/70 dark:bg-white/5 px-3 py-1 text-xs font-medium">Reporting</span>
-            <span class="rounded-full border border-black/10 dark:border-white/15 bg-white/70 dark:bg-white/5 px-3 py-1 text-xs font-medium">Process Improvement</span>
-            <span class="rounded-full border borderblack/10 dark:border-white/15 bg-white/70 dark:bg-white/5 px-3 py-1 text-xs font-medium">Operational Support</span>
+            <span class="chip rounded-full px-3 py-1 text-xs font-semibold">Requirements</span>
+            <span class="chip rounded-full px-3 py-1 text-xs font-semibold">Stakeholders</span>
+            <span class="chip rounded-full px-3 py-1 text-xs font-semibold">Reporting</span>
+            <span class="chip rounded-full px-3 py-1 text-xs font-semibold">Process Improvement</span>
+            <span class="chip rounded-full px-3 py-1 text-xs font-semibold">Operational Support</span>
           </div>
         </div>
 
-        <div class="md:col-span-5 rounded-3xl border border-black/10 dark:border-white/15 bg-white/70 dark:bg-white/5 p-6 shadow-soft">
-          <div class="text-sm font-semibold">What I’m looking for</div>
-          <ul class="mt-3 space-y-2 text-sm text-neutral-700 dark:text-neutral-300">
-            <li>• Business Analyst (Entry / Co-op)</li>
-            <li>• Banking Operations / Reporting</li>
-            <li>• Project Coordinator / PM Support</li>
-          </ul>
+        <div class="glass rounded-3xl p-6 shadow-soft md:col-span-5">
+          <h3 class="text-lg font-semibold">What I’m looking for</h3>
+          <div class="mt-3 space-y-2 text-sm muted">
+            <div>✅ Entry-level / Co-op: <b>Business Analyst</b></div>
+            <div>✅ <b>Banking Operations</b> / Reporting</div>
+            <div>✅ <b>Project Coordinator</b> / PM Support</div>
+          </div>
 
-          <div class="mt-5 text-sm font-semibold">Why I’m a safe hire</div>
-          <ul class="mt-3 space-y-2 text-sm text-neutral-700 dark:text-neutral-300">
-            <li>• Accurate with data + documentation</li>
-            <li>• Reliable execution in operations</li>
-            <li>• Comfortable with stakeholders</li>
-          </ul>
+          <div class="divider my-5"></div>
+
+          <h3 class="text-lg font-semibold">Why I’m different</h3>
+          <p class="mt-3 muted text-sm leading-relaxed">
+            I’m not only “good at analysis” — I also execute in real operational environments.
+            That means I design solutions that teams can actually follow.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- IMPACT -->
+    <section id="impact" class="reveal mt-12">
+      <div class="flex items-start gap-3">
+        <div class="glass rounded-2xl p-2">⚡</div>
+        <div>
+          <h2 class="text-2xl md:text-3xl font-extrabold tracking-tight">Impact</h2>
+          <p class="mt-1 muted">Quick proof that you create value.</p>
+        </div>
+      </div>
+
+      <div class="mt-5 grid gap-4 md:grid-cols-4">
+        <div class="glass rounded-3xl p-6 shadow-soft">
+          <div class="text-xs muted">Strength</div>
+          <div class="mt-2 text-xl font-extrabold">Process clarity</div>
+          <div class="mt-1 muted text-sm">Reduce confusion & rework</div>
+        </div>
+        <div class="glass rounded-3xl p-6 shadow-soft">
+          <div class="text-xs muted">Tooling</div>
+          <div class="mt-2 text-xl font-extrabold">Excel reporting</div>
+          <div class="mt-1 muted text-sm">Tracking + insights</div>
+        </div>
+        <div class="glass rounded-3xl p-6 shadow-soft">
+          <div class="text-xs muted">Mindset</div>
+          <div class="mt-2 text-xl font-extrabold">Ownership</div>
+          <div class="mt-1 muted text-sm">Reliable execution</div>
+        </div>
+        <div class="glass rounded-3xl p-6 shadow-soft">
+          <div class="text-xs muted">Domain</div>
+          <div class="mt-2 text-xl font-extrabold">Finance + Ops</div>
+          <div class="mt-1 muted text-sm">Practical + structured</div>
         </div>
       </div>
     </section>
@@ -249,62 +290,55 @@
     <!-- EXPERIENCE -->
     <section id="experience" class="reveal mt-12">
       <div class="flex items-start gap-3">
-        <div class="mt-1 rounded-2xl border border-black/10 dark:border-white/15 bg-white/70 dark:bg-white/5 p-2">💼</div>
+        <div class="glass rounded-2xl p-2">🧭</div>
         <div>
-          <h2 class="text-2xl md:text-3xl font-bold tracking-tight">Experience</h2>
-          <p class="mt-1 text-sm md:text-base text-neutral-700 dark:text-neutral-300">
-            Impact-focused bullets (results + responsibilities).
-          </p>
+          <h2 class="text-2xl md:text-3xl font-extrabold tracking-tight">Experience Timeline</h2>
+          <p class="mt-1 muted">Clean timeline format recruiters love.</p>
         </div>
       </div>
 
       <div class="mt-5 grid gap-4">
-        <div class="rounded-3xl border border-black/10 dark:border-white/15 bg-white/70 dark:bg-white/5 p-6 shadow-soft">
+        <div class="glass rounded-3xl p-6 shadow-soft">
           <div class="flex flex-wrap items-start justify-between gap-2">
             <div>
-              <div class="font-semibold text-lg">Cashier (Part-time)</div>
-              <div class="text-sm text-neutral-600 dark:text-neutral-400">Shell Canada Limited</div>
+              <div class="text-lg font-semibold">Cashier (Part-time) — Shell Canada Limited</div>
+              <div class="text-sm muted">Canada</div>
             </div>
-            <div class="text-xs text-neutral-500 dark:text-neutral-400">2024 – Present · Canada</div>
+            <div class="text-xs muted">2024 – Present</div>
           </div>
-          <ul class="mt-4 space-y-2 text-sm text-neutral-700 dark:text-neutral-300">
-            <li>• Utilised Excel and Power BI to analyze inventory and sales performance data.</li>
-            <li>• Developed structured tracking tools to improve stock visibility and reduce discrepancies.</li>
-            <li>• Identified workflow inefficiencies and supported operational improvements.</li>
-            <li>• Maintained organised documentation of daily operational processes.</li>
+          <ul class="mt-4 space-y-2 text-sm muted">
+            <li>• Used Excel and Power BI (basic) to analyze inventory/sales patterns.</li>
+            <li>• Built tracking tools to improve visibility and reduce discrepancies.</li>
+            <li>• Supported operational improvements and maintained process documentation.</li>
           </ul>
         </div>
 
-        <div class="rounded-3xl border border-black/10 dark:border-white/15 bg-white/70 dark:bg-white/5 p-6 shadow-soft">
+        <div class="glass rounded-3xl p-6 shadow-soft">
           <div class="flex flex-wrap items-start justify-between gap-2">
             <div>
-              <div class="font-semibold text-lg">Executive – Automation Department</div>
-              <div class="text-sm text-neutral-600 dark:text-neutral-400">Jainam Broking Limited (Comet Portal)</div>
+              <div class="text-lg font-semibold">Executive — Automation Dept (Comet Portal), Jainam Broking</div>
+              <div class="text-sm muted">India</div>
             </div>
-            <div class="text-xs text-neutral-500 dark:text-neutral-400">2023 – 2024 · India</div>
+            <div class="text-xs muted">2023 – 2024</div>
           </div>
-          <ul class="mt-4 space-y-2 text-sm text-neutral-700 dark:text-neutral-300">
-            <li>• Led automation initiatives to improve system efficiency and reduce manual dependencies.</li>
-            <li>• Managed the Comet portal; analysed user behaviour to enhance usability and adoption.</li>
-            <li>• Developed trader-focused features by assessing client needs and market trends.</li>
-            <li>• Conducted data analysis on trading behaviours to help refine investment strategies.</li>
-            <li>• Improved data efficiency, increasing traffic and preference over the legacy portal (Techexel).</li>
+          <ul class="mt-4 space-y-2 text-sm muted">
+            <li>• Managed Comet portal operations and improved reports/workflows based on stakeholder needs.</li>
+            <li>• Delivered trader-focused features using business analysis techniques.</li>
+            <li>• Enhanced data efficiency and improved platform adoption.</li>
           </ul>
         </div>
 
-        <div class="rounded-3xl border border-black/10 dark:border-white/15 bg-white/70 dark:bg-white/5 p-6 shadow-soft">
+        <div class="glass rounded-3xl p-6 shadow-soft">
           <div class="flex flex-wrap items-start justify-between gap-2">
             <div>
-              <div class="font-semibold text-lg">Industrial Automation Engineer Intern</div>
-              <div class="text-sm text-neutral-600 dark:text-neutral-400">SSM Infotech Solutions</div>
+              <div class="text-lg font-semibold">Industrial Automation Engineer Intern — SSM Infotech</div>
+              <div class="text-sm muted">India</div>
             </div>
-            <div class="text-xs text-neutral-500 dark:text-neutral-400">Jan 2023 – Apr 2023 · India</div>
+            <div class="text-xs muted">Jan 2023 – Apr 2023</div>
           </div>
-          <ul class="mt-4 space-y-2 text-sm text-neutral-700 dark:text-neutral-300">
-            <li>• Worked on projects for Mercedes-Benz India, Torrent Power Solar Plant, and Crest Resins Pvt. Ltd.</li>
-            <li>• Gained hands-on experience with SQL Server, InTouch HMI, PLC, and SCADA systems.</li>
-            <li>• Implemented client specifications and developed custom features to meet project requirements.</li>
-            <li>• Focused on automating workflows to improve efficiency and reliability.</li>
+          <ul class="mt-4 space-y-2 text-sm muted">
+            <li>• Worked on projects (Mercedes-Benz India, power/solar, manufacturing).</li>
+            <li>• Used SQL Server, PLC/SCADA, and HMI tools in real project environments.</li>
           </ul>
         </div>
       </div>
@@ -313,38 +347,36 @@
     <!-- PROJECTS -->
     <section id="projects" class="reveal mt-12">
       <div class="flex items-start gap-3">
-        <div class="mt-1 rounded-2xl border border-black/10 dark:border-white/15 bg-white/70 dark:bg-white/5 p-2">📁</div>
+        <div class="glass rounded-2xl p-2">🎯</div>
         <div>
-          <h2 class="text-2xl md:text-3xl font-bold tracking-tight">Projects</h2>
-          <p class="mt-1 text-sm md:text-base text-neutral-700 dark:text-neutral-300">
-            Short, strong highlights. (You can add links later.)
-          </p>
+          <h2 class="text-2xl md:text-3xl font-extrabold tracking-tight">Projects (Case-Style)</h2>
+          <p class="mt-1 muted">Looks like real work, not just “tasks”.</p>
         </div>
       </div>
 
       <div class="mt-5 grid gap-4 md:grid-cols-2">
-        <div class="rounded-3xl border border-black/10 dark:border-white/15 bg-white/70 dark:bg-white/5 p-6 shadow-soft">
-          <div class="font-semibold text-lg">Comet Portal — Reporting & Feature Enhancements</div>
-          <p class="mt-2 text-sm text-neutral-700 dark:text-neutral-300">
-            Translated stakeholder feedback into report and workflow upgrades to improve adoption and efficiency.
+        <div class="glass rounded-3xl p-6 shadow-soft">
+          <div class="text-lg font-semibold">Comet Portal — Reporting & Feature Enhancements</div>
+          <p class="mt-2 muted text-sm leading-relaxed">
+            Took stakeholder feedback → clarified requirements → improved reporting structure and workflow efficiency to support better user experience and adoption.
           </p>
-          <ul class="mt-4 space-y-2 text-sm text-neutral-700 dark:text-neutral-300">
-            <li>• Analysed user behaviour and pain points to guide improvements.</li>
-            <li>• Improved data efficiency and increased adoption vs. the legacy portal.</li>
-            <li>• Supported trader-focused features using business analysis techniques.</li>
-          </ul>
+          <div class="mt-4 grid gap-2 text-sm muted">
+            <div><b>Role:</b> Portal owner / BA-style coordination</div>
+            <div><b>Focus:</b> Reporting + usability + efficiency</div>
+            <div><b>Tools:</b> Data understanding + documentation + stakeholder communication</div>
+          </div>
         </div>
 
-        <div class="rounded-3xl border border-black/10 dark:border-white/15 bg-white/70 dark:bg-white/5 p-6 shadow-soft">
-          <div class="font-semibold text-lg">Operations Tracking Toolkit (Excel + Power BI)</div>
-          <p class="mt-2 text-sm text-neutral-700 dark:text-neutral-300">
-            Built tracking tools to improve stock visibility and reduce discrepancies in retail operations.
+        <div class="glass rounded-3xl p-6 shadow-soft">
+          <div class="text-lg font-semibold">Operations Tracking Toolkit — Excel + Power BI</div>
+          <p class="mt-2 muted text-sm leading-relaxed">
+            Built structured tracking tools for inventory and performance monitoring that improved visibility and supported faster day-to-day decisions.
           </p>
-          <ul class="mt-4 space-y-2 text-sm text-neutral-700 dark:text-neutral-300">
-            <li>• Created Excel trackers for inventory/sales performance monitoring.</li>
-            <li>• Improved process consistency with documented daily routines.</li>
-            <li>• Supported better decisions using basic Power BI insights.</li>
-          </ul>
+          <div class="mt-4 grid gap-2 text-sm muted">
+            <div><b>Role:</b> Operations support / analyst mindset</div>
+            <div><b>Focus:</b> Tracking + insights + consistency</div>
+            <div><b>Tools:</b> Excel + basic Power BI dashboards</div>
+          </div>
         </div>
       </div>
     </section>
@@ -352,166 +384,82 @@
     <!-- SKILLS -->
     <section id="skills" class="reveal mt-12">
       <div class="flex items-start gap-3">
-        <div class="mt-1 rounded-2xl border border-black/10 dark:border-white/15 bg-white/70 dark:bg-white/5 p-2">🧠</div>
+        <div class="glass rounded-2xl p-2">🧩</div>
         <div>
-          <h2 class="text-2xl md:text-3xl font-bold tracking-tight">Skills</h2>
-          <p class="mt-1 text-sm md:text-base text-neutral-700 dark:text-neutral-300">
-            Organized for ATS + recruiters.
-          </p>
+          <h2 class="text-2xl md:text-3xl font-extrabold tracking-tight">Skills (Easy to Scan)</h2>
+          <p class="mt-1 muted">ATS-friendly categories.</p>
         </div>
       </div>
 
       <div class="mt-5 grid gap-4 md:grid-cols-3">
-        <div class="rounded-3xl border border-black/10 dark:border-white/15 bg-white/70 dark:bg-white/5 p-6 shadow-soft">
-          <div class="font-semibold">Core Skills</div>
-          <ul class="mt-3 space-y-2 text-sm text-neutral-700 dark:text-neutral-300">
-            <li>• Project Coordination</li>
-            <li>• Requirements Management</li>
-            <li>• Stakeholder Communication</li>
-            <li>• Process Improvement</li>
-            <li>• Operational Support</li>
-            <li>• Issue Resolution</li>
+        <div class="glass rounded-3xl p-6 shadow-soft">
+          <div class="font-semibold">Business Analysis</div>
+          <ul class="mt-3 space-y-2 text-sm muted">
+            <li>• Requirements gathering</li>
+            <li>• Stakeholder communication</li>
+            <li>• Documentation & SOPs</li>
+            <li>• Process improvement</li>
           </ul>
         </div>
-
-        <div class="rounded-3xl border border-black/10 dark:border-white/15 bg-white/70 dark:bg-white/5 p-6 shadow-soft">
-          <div class="font-semibold">Analytics & Reporting</div>
-          <ul class="mt-3 space-y-2 text-sm text-neutral-700 dark:text-neutral-300">
-            <li>• Excel (tracking, reporting, analysis)</li>
-            <li>• Power BI (foundational / learning)</li>
-            <li>• Documentation & Templates</li>
+        <div class="glass rounded-3xl p-6 shadow-soft">
+          <div class="font-semibold">Reporting & Tools</div>
+          <ul class="mt-3 space-y-2 text-sm muted">
+            <li>• Excel (tracking, reporting)</li>
+            <li>• Power BI (basic dashboards)</li>
+            <li>• Structured templates</li>
           </ul>
         </div>
-
-        <div class="rounded-3xl border border-black/10 dark:border-white/15 bg-white/70 dark:bg-white/5 p-6 shadow-soft">
+        <div class="glass rounded-3xl p-6 shadow-soft">
           <div class="font-semibold">Technical (Foundational)</div>
-          <ul class="mt-3 space-y-2 text-sm text-neutral-700 dark:text-neutral-300">
-            <li>• SQL Server (foundational)</li>
-            <li>• Portal / Platform support</li>
-            <li>• PLC / SCADA / HMI exposure</li>
-            <li>• Systems & process understanding</li>
+          <ul class="mt-3 space-y-2 text-sm muted">
+            <li>• SQL Server (basic)</li>
+            <li>• Portal/platform support</li>
+            <li>• PLC/SCADA/HMI exposure</li>
           </ul>
-        </div>
-      </div>
-    </section>
-
-    <!-- EDUCATION -->
-    <section id="education" class="reveal mt-12">
-      <div class="flex items-start gap-3">
-        <div class="mt-1 rounded-2xl border border-black/10 dark:border-white/15 bg-white/70 dark:bg-white/5 p-2">🎓</div>
-        <div>
-          <h2 class="text-2xl md:text-3xl font-bold tracking-tight">Education</h2>
-          <p class="mt-1 text-sm md:text-base text-neutral-700 dark:text-neutral-300">
-            Relevant academic focus for BA/finance ops roles.
-          </p>
-        </div>
-      </div>
-
-      <div class="mt-5 grid gap-4">
-        <div class="rounded-3xl border border-black/10 dark:border-white/15 bg-white/70 dark:bg-white/5 p-6 shadow-soft">
-          <div class="flex flex-wrap items-start justify-between gap-2">
-            <div>
-              <div class="font-semibold text-lg">Master’s in Project Management (Business Analysis)</div>
-              <div class="text-sm text-neutral-600 dark:text-neutral-400">Northeastern University — Toronto, Canada</div>
-            </div>
-            <div class="text-xs text-neutral-500 dark:text-neutral-400">2024 – 2026</div>
-          </div>
-          <p class="mt-3 text-sm text-neutral-700 dark:text-neutral-300">
-            Focus: requirements, stakeholder communication, planning, and delivery fundamentals.
-          </p>
-        </div>
-
-        <div class="rounded-3xl border border-black/10 dark:border-white/15 bg-white/70 dark:bg-white/5 p-6 shadow-soft">
-          <div class="flex flex-wrap items-start justify-between gap-2">
-            <div>
-              <div class="font-semibold text-lg">B.E. in Instrumentation & Control Engineering</div>
-              <div class="text-sm text-neutral-600 dark:text-neutral-400">Gujarat Technological University — India</div>
-            </div>
-            <div class="text-xs text-neutral-500 dark:text-neutral-400">2019 – 2023</div>
-          </div>
-          <p class="mt-3 text-sm text-neutral-700 dark:text-neutral-300">
-            Foundation in systems thinking and industrial automation fundamentals.
-          </p>
-        </div>
-      </div>
-    </section>
-
-    <!-- CERTIFICATIONS -->
-    <section id="certs" class="reveal mt-12">
-      <div class="flex items-start gap-3">
-        <div class="mt-1 rounded-2xl border border-black/10 dark:border-white/15 bg-white/70 dark:bg-white/5 p-2">🏅</div>
-        <div>
-          <h2 class="text-2xl md:text-3xl font-bold tracking-tight">Certifications</h2>
-          <p class="mt-1 text-sm md:text-base text-neutral-700 dark:text-neutral-300">
-            Strong signals for BA/PM fundamentals.
-          </p>
-        </div>
-      </div>
-
-      <div class="mt-5 grid gap-4 md:grid-cols-2">
-        <div class="rounded-3xl border border-black/10 dark:border-white/15 bg-white/70 dark:bg-white/5 p-6 shadow-soft">
-          <div class="font-semibold">Project Management Foundations: Requirements (PMI® REP)</div>
-          <div class="mt-1 text-sm text-neutral-600 dark:text-neutral-400">Issued: January 2025</div>
-        </div>
-
-        <div class="rounded-3xl border border-black/10 dark:border-white/15 bg-white/70 dark:bg-white/5 p-6 shadow-soft">
-          <div class="font-semibold">Project Management: Preventing Scope Creep</div>
-          <div class="mt-1 text-sm text-neutral-600 dark:text-neutral-400">Issued: January 2025</div>
-        </div>
-
-        <div class="rounded-3xl border border-black/10 dark:border-white/15 bg-white/70 dark:bg-white/5 p-6 shadow-soft md:col-span-2">
-          <div class="font-semibold">Requirements Elicitation for Business Analysis: Stakeholder Conversations</div>
-          <div class="mt-1 text-sm text-neutral-600 dark:text-neutral-400">Issued: January 2025</div>
         </div>
       </div>
     </section>
 
     <!-- CONTACT -->
     <section id="contact" class="reveal mt-12">
-      <div class="flex items-start gap-3">
-        <div class="mt-1 rounded-2xl border border-black/10 dark:border-white/15 bg-white/70 dark:bg-white/5 p-2">📩</div>
-        <div>
-          <h2 class="text-2xl md:text-3xl font-bold tracking-tight">Contact</h2>
-          <p class="mt-1 text-sm md:text-base text-neutral-700 dark:text-neutral-300">
-            One click to reach you.
-          </p>
-        </div>
-      </div>
-
-      <div class="mt-5 rounded-3xl border border-black/10 dark:border-white/15 bg-white/70 dark:bg-white/5 p-6 shadow-soft">
-        <div class="grid gap-3 md:grid-cols-3">
-          <a class="rounded-2xl border border-black/10 dark:border-white/15 bg-white/70 dark:bg-white/5 px-4 py-3 text-sm hover:bg-white dark:hover:bg-white/10"
-             href="mailto:kedarchoksi03@gmail.com">
-            ✉️ Email: <span class="font-semibold">kedarchoksi03@gmail.com</span>
-          </a>
-
-          <a class="rounded-2xl border border-black/10 dark:border-white/15 bg-white/70 dark:bg-white/5 px-4 py-3 text-sm hover:bg-white dark:hover:bg-white/10"
-             target="_blank" href="https://www.linkedin.com/in/kedar-choksi-14b839226/">
-            🔗 LinkedIn: <span class="font-semibold">kedar-choksi-14b839226</span>
-          </a>
-
-          <div class="rounded-2xl border border-black/10 dark:border-white/15 bg-white/70 dark:bg-white/5 px-4 py-3 text-sm">
-            📞 Phone: <span class="font-semibold">+1 (647) 719-1591</span>
+      <div class="glass rounded-3xl p-7 shadow-soft shine">
+        <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-6">
+          <div>
+            <h2 class="text-2xl md:text-3xl font-extrabold tracking-tight">Let’s talk.</h2>
+            <p class="mt-2 muted">If you have a role in Business Analysis / Banking Ops / PM Support, I’m ready.</p>
+          </div>
+          <div class="flex flex-wrap gap-3">
+            <a class="btn-primary rounded-2xl px-6 py-3 text-sm font-semibold shadow-glow hover:opacity-90"
+               href="mailto:kedarchoksi03@gmail.com">Email Me</a>
+            <a class="btn rounded-2xl px-6 py-3 text-sm font-semibold hover:bg-white/10"
+               href="https://www.linkedin.com/in/kedar-choksi-14b839226/" target="_blank">LinkedIn</a>
           </div>
         </div>
 
-        <div class="mt-4 text-xs text-neutral-500 dark:text-neutral-400">
-          Want an even stronger portfolio? Add: (1) a professional photo, (2) 2–3 project links/screenshots, (3) target role (BA or Banking Ops). I’ll tailor it.
-        </div>
-      </div>
-    </section>
+        <div class="divider my-6"></div>
 
-    <footer class="reveal mt-10 pb-10 text-center text-xs text-neutral-500 dark:text-neutral-400">
-      © <span id="year"></span> Kedar Choksi • Built for recruiters • Clean • Fast • Professional
-    </footer>
+        <div class="grid gap-3 md:grid-cols-3 text-sm muted">
+          <div>📍 Toronto, ON, Canada</div>
+          <div>✉️ kedarchoksi03@gmail.com</div>
+          <div>📞 +1 (647) 719-1591</div>
+        </div>
+
+        <p class="mt-4 text-xs muted">
+          Tip: Add your resume PDF link in the script below to enable “Download Resume”.
+        </p>
+      </div>
+
+      <footer class="mt-10 pb-10 text-center text-xs muted">
+        © <span id="year"></span> Kedar Choksi • Designed for recruiters • Fast • Clean • Premium
+      </footer>
+    </section>
   </main>
 
   <script>
-    // ====== EDIT THIS: add your resume PDF link (Google Drive direct, Dropbox, etc.) ======
-    // Example: const resumeLink = "https://example.com/kedar_resume.pdf";
-    const resumeLink = ""; // <-- paste your resume PDF link here
+    // 1) Add your resume PDF link here (Google Drive / Dropbox link):
+    const resumeLink = ""; // <-- paste your PDF link
 
-    // Resume button
+    // Resume button behavior
     const resumeBtn = document.getElementById('resumeBtn');
     if (resumeLink && resumeLink.trim() !== "") {
       resumeBtn.href = resumeLink;
@@ -525,30 +473,29 @@
     // Year
     document.getElementById('year').textContent = new Date().getFullYear();
 
-    // Dark mode toggle with memory
-    const root = document.documentElement;
+    // Light/Dark toggle (true theme)
     const themeBtn = document.getElementById('themeBtn');
-    const saved = localStorage.getItem('theme');
-    if (saved === 'dark') root.classList.add('dark');
-
-    function syncThemeButton(){
-      const isDark = root.classList.contains('dark');
-      themeBtn.textContent = isDark ? "☀️ Light" : "🌙 Dark";
+    const saved = localStorage.getItem('mode') || 'dark';
+    if(saved === 'light') {
+      document.body.style.background = "linear-gradient(180deg,#ffffff,#f5f5f5)";
+      document.body.style.color = "#0a0a0a";
     }
-    syncThemeButton();
+    function syncBtn(){
+      const isLight = localStorage.getItem('mode') === 'light';
+      themeBtn.textContent = isLight ? "🌙 Dark" : "☀️ Light";
+    }
+    syncBtn();
 
     themeBtn.addEventListener('click', () => {
-      root.classList.toggle('dark');
-      localStorage.setItem('theme', root.classList.contains('dark') ? 'dark' : 'light');
-      syncThemeButton();
+      const isLight = localStorage.getItem('mode') === 'light';
+      localStorage.setItem('mode', isLight ? 'dark' : 'light');
+      location.reload();
     });
 
-    // Smooth reveal on scroll
+    // Scroll reveal
     const items = document.querySelectorAll('.reveal');
     const io = new IntersectionObserver((entries) => {
-      entries.forEach(e => {
-        if (e.isIntersecting) e.target.classList.add('in');
-      });
+      entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('in'); });
     }, { threshold: 0.12 });
     items.forEach(el => io.observe(el));
   </script>
